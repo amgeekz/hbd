@@ -350,19 +350,16 @@ function aktipesan7() {
   ftganti = 1;
   setTimeout(ftmuncul, 300);
   document.getElementById('wallpaper').style = "transform: scale(1);";
-  new TypeIt("#pesan7", {
-    strings: ["" + vketik7],
-    startDelay: 1,
-    speed: 52,
-    cursor: true,
-    waitUntilVisible: true,
-    lifelike: true,
-    afterComplete: function() {
-      document.getElementById('pesan7').innerHTML = vketik7;
-      fungsi = 1;
-      setTimeout(tombol, 400);
-    },
-  }).go();
+  
+  // TAMPILIN PESAN 7 DULU
+  document.getElementById('pesan7').style.display = "block";
+  document.getElementById('pesan7').style.opacity = "1";
+  document.getElementById('pesan7').style.transform = "scale(1)";
+  document.getElementById('pesan7').innerHTML = vketik7;
+  
+  // BARU MUNCULIN TOMBOL
+  fungsi = 1;
+  setTimeout(tombol, 600);
 }
 
 const vketik81 = document.getElementById('pesan8').innerHTML;
