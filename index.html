@@ -1,136 +1,313 @@
 <!DOCTYPE html>
 <html>
-<meta charset='UTF-8'/><meta content='width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=5' name='viewport'/><meta content='IE=edge' http-equiv='X-UA-Compatible'/>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Shippori+Antique:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
-  
-  <!-- PASTIKAN LINK CSS INI MENGGUNAKAN RAW URL -->
-  <link href="https://raw.githubusercontent.com/amgeekz/hbd/main/style.css" rel="stylesheet" type="text/css" />
-  
-  <script src="https://unpkg.com/typeit@8.7.0/dist/index.umd.js"></script>
-  <script src="https://kit.fontawesome.com/4f3ce16e3e.js" crossorigin="anonymous"></script>
-  
 <head>
+<meta charset='UTF-8'/>
+<meta content='width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=5' name='viewport'/>
+<meta content='IE=edge' http-equiv='X-UA-Compatible'/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Antique:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+<script src="https://unpkg.com/typeit@8.7.0/dist/index.umd.js"></script>
+<script src="https://kit.fontawesome.com/4f3ce16e3e.js" crossorigin="anonymous"></script>
+
 <title>Script HTML buat Kamu</title>
-<link rel="icon" type="image/x-icon" href="https://www.palingit.com/favicon.ico">
-<meta name="description" content="HTML Replit Coding">
-<!-- 
-  Made with love by Rayys!
-  
-     Blog: https://PalingIT.com
-     Instagram: @rayyarrr
-     TikTok: @rayy4r
-     Email: rayyar0703@gmail.com
-     
-  Thanks to all <3
--->
+
+<style>
+/* ===== CSS LENGKAP DI SINI ===== */
+:root {
+  --tombol-bg: rgba(0, 0, 0, .3); 
+  --tombol-teks: #fff;
+  --tombol-bingkai: #fff;
+  --bingkai: 8px;
+  --bingkai-kiri: 1.3px solid var(--tombol-bingkai);
+  --bingkai-kanan: 1.3px solid var(--tombol-bingkai);
+  --gaya-font: 'Shippori Antique', sans-serif;
+  --gaya-font2: 'Dancing Script', sans-serif;
+}
+
+@keyframes fanim {0% {background-position: 0% 0%;}25% {background-position: 100% 100%;} 50% {background-position: 0% 100%;} 75% {background-position: 50% 50%;} 100% {background-position: 0% 0%;}}
+
+body{background-color:#000;font-family:var(--gaya-font);padding: 20px 25px;-webkit-user-select: none; -ms-user-select: none; user-select: none;} 
+a{text-decoration:none;}
+
+#bodyblur{opacity:0;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.3);transition:all 1s ease;} 
+#wallpaper{width:100%;height:100%;transform: scale(2);transition:all 1.3s ease;}
+
+/* ===== INI YANG DIPERBAIKI: BLUR NYA ===== */
+#beneranblur{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:rgba(0,0,0,.1); /* lebih transparan biar blur keliatan */
+  -webkit-backdrop-filter:blur(10px); /* blur 10px */
+  backdrop-filter:blur(10px); /* blur 10px */
+  transition:all 3s ease;
+}
+
+@keyframes jj{0%  {transform: scale(1.1);} 50% {transform: scale(1.2);} 100% {transform: scale(1.1);}}
+@keyframes rts{from {transform:scale(.1);} to {transform:scale(1);}}
+@keyframes rto{from {transform:scale(1);} to {transform:scale(1.1);}}
+@keyframes aniopa{0% {transform: scale(1);} 50% {transform: scale(.75);} 100% {transform: scale(1);}}
+@keyframes rtf{from {transform: rotate(0deg);} to {transform: rotate(360deg);}} 
+@keyframes rt{from {transform: scale(.9);} to {transform: scale(1);}}
+@keyframes kont{0%  {left:-1px; top:-3px;} 50% {left:1px; top:3px;} 100% {left:-1px; top:-3px;}}
+
+blockquote{
+  position:absolute;
+  opacity:0;
+  visibility:hidden;
+  margin-top:100px;
+  background:var(--tombol-bg);
+  border-radius:18px 0 18px 0;
+  box-shadow: rgba(255,255,255, 0.3) 0px 7px 29px 0px;
+  transform: scale(.1);
+  transition:all 1s ease;
+  margin-top:120px;
+  margin-left:0;
+  margin-right:0;
+  color:var(--tombol-teks);
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, .8);
+  width:400px;
+  text-align:center;
+  line-height:1.3em;
+  padding:20px;
+}
+blockquote::before{
+  content:attr(data-text);
+  opacity:.7;
+  font-family: sans-serif;
+  position:absolute;
+  left:8px;
+  top:8px;
+  min-width:15px;
+  font-size:16px;
+  text-align:center
+}
+blockquote::after{
+  content: "";
+  position: absolute;
+  border: 1px solid #fff;
+  border-radius:18px 0 18px 0;
+  top: -8px;
+  bottom: -8px;
+  left: -8px;
+  right: -8px;
+}
+blockquote p{font-size:16px;font-weight:700;line-height:1.4em;transition:all .5s ease;}
+blockquote > .gaya2{font-size:15px;font-weight:400}
+blockquote > #pesan3{position: absolute;opacity:0;transform: scale(.1);transition:all .7s ease;}
+blockquote > #pesan5, blockquote > #pesan8{margin-top:25px}
+blockquote p:not(#opsL, #kalimat, #pesan3, .gaya2){display:none;}
+blockquote > #opsL{text-align:right;font-size:11px;font-weight:400;line-height:0;margin-top:24px;color:white;opacity:0;transition:all .2s ease;}
+
+#Tombol{position:relative;opacity:0;margin:0;display:flex;align-items:left;list-style:none;transform: scale(.1);transition:all 1s ease;}
+#Tombol a{cursor:pointer;display:inline-flex;align-items:center; margin:0;margin:12px 0 12px 0;transition:all .2s ease;padding:10px;outline:0;border: 1px solid #fefefeba;border-radius:10px 0 10px 0;line-height:15px;background:rgba(0,0,0,.5);color:var(--tombol-teks);font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;box-shadow: rgba(255,255,255, 0.3) 0px 7px 29px 0px;z-index:1} 
+
+#Content{
+  animation-name:none;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  position:relative;
+  opacity:0;
+  margin-top:50px;
+  width:100%;
+  height:180px;
+  transition:all .7s ease;
+}
+#Content > *{display:flex;align-items:center;text-align:center;justify-content:center;margin-top:1px;}
+
+.kumpulanstiker > img{
+  display:none;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(255,255,255, 0.3);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  padding:10px;
+  width:100px;
+  height:100px;
+  margin:20px 0;
+}
+#fotostiker{opacity:.1;transition:all 1.2s ease;transform: scale(.1);}
+
+.halo{font-size:18px !important;position:relative;margin:15px 0 20px 0} 
+.halo.gaya2{font-family:var(--gaya-font2);font-size:24px !important;margin-top:20px !important;}
+.halo.sty3{position:absolute !important;font-size:14px !important;font-weight:400 !important;margin:30px 20px !important;}
+
+#kadoIn img{display:inline-flex;background:none;width:130px;height:130px;transition:all .3s ease;} 
+#kadoIn img:hover{transform:scale(.9);}
+#ket, .halo{text-shadow: 0px 2px 2px rgba(0, 0, 0, .8);font-size:17px;font-weight:700;color:white}
+#ket{margin-top:25px !important;font-weight:400;}
+
+#kolombaru{
+  position:absolute;
+  opacity:0;
+  display:flex;
+  transform:scale(.1);
+  transition:all 1s ease;
+  align-items:center;
+  text-align:center;
+  justify-content:center;
+  z-index:1;
+}
+#kolombaru > li{margin:8px;padding:0;list-style-type: none;}
+#kolombaru li{opacity:.8;display:flex;font-size:30px}
+#kolombaru li:hover{opacity:.5;transform: scale(1.15);transition:all .3s ease;}
+
+.fa-snowflake {
+  opacity:.3;
+  color:white;
+  font-size: 20px;
+  position: absolute;
+  animation: heartMove linear 1;
+  top: -10vh;
+  z-index: 0;
+}
+@keyframes heartMove {
+  0%{transform: translateY(-10vh) ;} 
+  100%{transform: translateY(100vh) ;}
+}
+
+.sembunyi, #pesanditolak > *, #kado2, #kado3{display:none !important}
+.swal2-modal > *{font-size:16px;}
+.swal2-title{line-height:1.3em;font-size:17px;text-align:center;padding:15px 30px 0 30px;}
+.swal2-timer-progress-bar-container > *{opacity:.7;background:#00B6FF;margin:0 2px}
+.swal2-modal{background:#EAEAEA;box-shadow: 0 4px 30px rgba(255,255,255, 0.3);backdrop-filter: blur(2px);-webkit-backdrop-filter: blur(2px);border: 1px solid rgba(255, 255, 255, 0.3);border-radius: 8px;max-width:330px;top:-60px;}
+.swal2-styled.swal2-confirm, .swal2-styled.swal2-cancel{position: relative;background-color: #4839eb;color: #fff;border-radius:18px;z-index: 1;transition: all 0.2s;}
+</style>
+
 </head>
 <body>
 	
-   <!-- Ganti Audio di sini -->
-   <audio src="https://github.com/amgeekz/hbd/raw/main/binksake-remix.mp3" id="linkmp3" class="sembunyi"></audio>
+  <!-- Audio -->
+  <audio src="https://github.com/amgeekz/hbd/raw/main/binksake-remix.mp3" id="linkmp3" class="sembunyi"></audio>
    
-   <div id="bodyblur">
-     <!-- Wallpaper -->
-     <img src="https://raw.githubusercontent.com/amgeekz/hbd/main/sunnygo.jpg" id="wallpaper"/>
-     <div id="beneranblur"></div>
-   </div>
+  <div id="bodyblur">
+    <img src="https://raw.githubusercontent.com/amgeekz/hbd/main/sunnygo.jpg" id="wallpaper"/>
+    <div id="beneranblur"></div>
+  </div>
    
-   <div id='Content'>
+  <div id='Content'>
+    <div id="kadoIn">
+      <img src="https://feeldreams.github.io/kadoin.png"/>
+    </div>
+    <p id="ket">Klik Kadonya!</p>
 
-     <div id="kadoIn">
-       <!-- Tombol Surat -->
-       <img src="https://feeldreams.github.io/kadoin.png"/>
-     </div>
-     <p id="ket">Klik Kadonya!</p>
-
-     <div class="kumpulanstiker">
-         <!-- Stiker untuk Konten -->
-         <img src="https://feeldreams.github.io/bunga.gif" id="fotostiker"/>
-         <img src="https://feeldreams.github.io/pusn.gif" id="fotostiker1"/>
-         <img src="https://feeldreams.github.io/pandacoklat.gif" id="fotostiker2"/>
-         <img src="https://feeldreams.github.io/cilukba.gif" id="fotostiker3"/>
-         <img src="https://feeldreams.github.io/pandakuning.gif" id="fotostiker4"/>
-         <img src="https://feeldreams.github.io/emawh.gif" id="fotostiker5"/>
-         
-         <img src="https://feeldreams.github.io/pandacoklat.gif" id="fotostiker6"/>
-     </div>
+    <div class="kumpulanstiker">
+      <img src="https://feeldreams.github.io/bunga.gif" id="fotostiker"/>
+      <img src="https://feeldreams.github.io/pusn.gif" id="fotostiker1"/>
+      <img src="https://feeldreams.github.io/pandacoklat.gif" id="fotostiker2"/>
+      <img src="https://feeldreams.github.io/cilukba.gif" id="fotostiker3"/>
+      <img src="https://feeldreams.github.io/pandakuning.gif" id="fotostiker4"/>
+      <img src="https://feeldreams.github.io/emawh.gif" id="fotostiker5"/>
+      <img src="https://feeldreams.github.io/pandacoklat.gif" id="fotostiker6"/>
+    </div>
      
-     <p id="halo" class="halo"></p>
+    <p id="halo" class="halo"></p>
      
-     <div><blockquote id='bq' data-text='㋡'>
-       <p id="kalimat">Aku Ada Sesuatu Nih 🤣❤️</p>
+    <div>
+      <blockquote id='bq' data-text='㋡'>
+        <p id="kalimat">Aku Ada Sesuatu Nih 🤣❤️</p>
+        <p id="pesan1">Klik 4 LOVE di Bawah! 😆❤️</p>
+        <div id="kolombaru">
+          <li id="lv1">🤍</li>
+          <li id="lv2">🤍</li>
+          <li id="lv3">🤍</li>
+          <li id="lv4">🤍</li>
+        </div>
+        <p id="pesan2">Tunggu...</p>
+        <p id="pesan3">Ciee.. Ada yang Ultah Nih 🤣❤️</p>
+        <p id="pesan4">Happy Birthday, </p>
+        <p id="pesan5" class="gaya2">Nambah tua aja ya, hehe</p>
+        <p id="pesan6" class="gaya2">Moga panjang umur biar tiap tahun bisa traktirin aku wkwk 😆❤️</p>
+        <p id="pesan7" class="gaya2">Sehat selalu ya!</p>
+        <p id="pesan8" class="gaya2">Canda wkwwk :v</p>
+        <p id="pesan9" class="gaya2">Oh iya, semoga di hari spesialmu ini kamu dapat menjadi pribadi yang lebih baik yaa.. 🥳❤️</p>
+        <p id="pesan10" class="gaya2">Happy Level Up Day!! 🥳</p>
+        <p id="opsL">Klik untuk Lanjut</p>
+      </blockquote>
+    </div>
 
-       <p id="pesan1">Klik 4 LOVE di Bawah! 😆❤️</p>
-       <div id="kolombaru">
-         <li id="lv1">🤍</li>
-         <li id="lv2">🤍</li>
-         <li id="lv3">🤍</li>
-         <li id="lv4">🤍</li>
-       </div>
-
-       <p id="pesan2">Tunggu...</p>
-       <!-- Pesan -->
-       <p id="pesan3">Ciee.. Ada yang Ultah Nih 🤣❤️</p>
-       <p id="pesan4">Happy Birthday, </p>
-       <p id="pesan5" class="gaya2">Nambah tua aja ya, hehe</p>
-       <p id="pesan6" class="gaya2">Moga panjang umur biar tiap tahun bisa traktirin aku wkwk 😆❤️</p>
-       <p id="pesan7" class="gaya2">Sehat selalu ya!</p>
-
-       <p id="pesan8" class="gaya2">Canda wkwwk :v</p>
-       <p id="pesan9" class="gaya2">Oh iya, semoga di hari spesialmu ini kamu dapat menjadi pribadi yang lebih baik yaa.. 🥳❤️</p>
-       <p id="pesan10" class="gaya2">Happy Level Up Day!! 🥳</p>
-
-       <!-- Tombol Lanjut -->
-       <p id="opsL">Klik untuk Lanjut</p>
-     </blockquote></div>
-
-     <!-- Tombol Kirim Pesan -->
-     <div id="Tombol"><a id="By">&#128140; Lanjut</a></div>
-
-     <!-- Pesan Tambahan -->
-     <p id="katatambahan" class="sembunyi">Gajadi deh soalnya kamu bau wleee 😜</p>
+    <div id="Tombol"><a id="By">&#128140; Lanjut</a></div>
+    <p id="katatambahan" class="sembunyi">Gajadi deh soalnya kamu bau wleee 😜</p>
      
-     <!-- Pesan Ditolak -->
-     <div id="pesanditolak">
-       <img id="stikerditolak" src="https://feeldreams.github.io/weee.gif"/>
-       <p id="kataditolak">Yaudah kalo gamau mh 😜</p>
-     </div>
-
-   </div>
+    <div id="pesanditolak">
+      <img id="stikerditolak" src="https://feeldreams.github.io/weee.gif"/>
+      <p id="kataditolak">Yaudah kalo gamau mh 😜</p>
+    </div>
+  </div>
 
 <script>
-  const body = document.querySelector("body");const swalst = Swal.mixin({timer: 2300, allowOutsideClick: false, showConfirmButton: false, timerProgressBar: true, imageHeight: 90,}); audio = new Audio('' + linkmp3.src); ftganti=0;fungsi=0;fungsiAwal=0;deffotostiker=fotostiker.src;function berjatuhan() {const heart = document.createElement("div"); heart.className = "fas fa-snowflake"; heart.style.left = (Math.random() * 90)+"vw"; heart.style.animationDuration = (Math.random()*3)+2+"s"; body.appendChild(heart);} setInterval(function name(params) {var heartArr = document.querySelectorAll(".fa-snowflake"); if (heartArr.length > 100) {heartArr[0].remove()}},100);Content.style = "opacity:1;margin-top:16vh"; const swals = Swal.mixin({allowOutsideClick: false, cancelButtonColor: '#FF0040', imageHeight: 80,}); 
+  const body = document.querySelector("body");
+  const swalst = Swal.mixin({timer: 2300, allowOutsideClick: false, showConfirmButton: false, timerProgressBar: true, imageHeight: 90,}); 
+  audio = new Audio('' + linkmp3.src); 
+  ftganti=0;
+  fungsi=0;
+  fungsiAwal=0;
+  deffotostiker=fotostiker.src;
+  
+  function berjatuhan() {
+    const heart = document.createElement("div"); 
+    heart.className = "fas fa-snowflake"; 
+    heart.style.left = (Math.random() * 90)+"vw"; 
+    heart.style.animationDuration = (Math.random()*3)+2+"s"; 
+    body.appendChild(heart);
+  } 
+  
+  setInterval(function name(params) {
+    var heartArr = document.querySelectorAll(".fa-snowflake"); 
+    if (heartArr.length > 100) {heartArr[0].remove()}
+  },100);
+  
+  Content.style = "opacity:1;margin-top:16vh"; 
+  const swals = Swal.mixin({allowOutsideClick: false, cancelButtonColor: '#FF0040', imageHeight: 80,}); 
 	
-  document.getElementById("kadoIn").onclick = function() {if(fungsiAwal==0){audio.play();fungsiAwal=1;kadoIn.style="transition:all .8s ease;transform:scale(10);opacity:0";wallpaper.style="transform: scale(1.5);";ket.style="display:none";setTimeout(initengahan,300);setTimeout(inipesan,500)}}
+  document.getElementById("kadoIn").onclick = function() {
+    if(fungsiAwal==0){
+      audio.play();
+      fungsiAwal=1;
+      kadoIn.style="transition:all .8s ease;transform:scale(10);opacity:0";
+      wallpaper.style="transform: scale(1.5);";
+      ket.style="display:none";
+      setTimeout(initengahan,300);
+      setTimeout(inipesan,500)
+    }
+  }
   
   async function inipesan(){
     var { value: nama } = await swals.fire({
-           title: 'Masukin Nama Kamu', input: 'text',
-       });
-       if(nama && nama.length < 11){
-         window.nama = nama;
-         vketikhalo="Hai, " + nama + " ✨";
-         mulainama();
-         } else {
-           await swals.fire('Ups!', 'Nama tidak boleh kosong atau lebih dari 10 karakter, ya!');inipesan();
+      title: 'Masukin Nama Kamu', 
+      input: 'text',
+    });
+    if(nama && nama.length < 11){
+      window.nama = nama;
+      vketikhalo="Hai, " + nama + " ✨";
+      mulainama();
+    } else {
+      await swals.fire('Ups!', 'Nama tidak boleh kosong atau lebih dari 10 karakter, ya!');
+      inipesan();
     }
   }
 
-  //Variable Pertanyaan Akhir
   var tanya = 'Mau Kado Gak Nih? 😶❤️';
   var opstanya = 'Ayo jawab 😆';
   var tompositif = 'Mau';
   var tomnegatif = 'Engga';
     
-    async function menuju(){pesanwhatsapp = "Makasii udah ngucapin " + nama + " ultah ><";await swals.fire('OK!', 'Kirim jawabannya ke WhatsApp aku, ya!', 'success');window.location = "https://api.whatsapp.com/send?phone=6285649455626&text=" + pesanwhatsapp;}
+  async function menuju(){
+    pesanwhatsapp = "Makasii udah ngucapin " + nama + " ultah ><";
+    await swals.fire('OK!', 'Kirim jawabannya ke WhatsApp aku, ya!', 'success');
+    window.location = "https://api.whatsapp.com/send?phone=6285649455626&text=" + pesanwhatsapp;
+  }
 </script>
 <script src="https://amgeekz.github.io/hbd/script.js"></script>
-<!-- Sampai Sini -->
+
 </body>
 </html>
